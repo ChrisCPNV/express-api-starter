@@ -2,10 +2,10 @@
 const db = require('../config/database');
 
 class Pizzas {
-    static create({ name, description, imageUrl, price }) {
+    static create({ name, ingredient, imageUrl, price }) {
         const sql = `INSERT INTO pizzas (name, ingredients[], imageUrl, price, created_at, updated_at)
                  VALUES (?, ?, ?, ?, datetime('now'), datetime('now'))`;
-        const params = [name, description || null, imageUrl || null, price];
+        const params = [name, ingredient || null, imageUrl || null, price];
 
         return new Promise((resolve, reject) => {
             db.run(sql, params, function (err) {
@@ -36,7 +36,7 @@ class Pizzas {
         });
     }
 
-    static update(id, { name, description, imageUrl, price }) {
+    static update(id, { name, ingredient, imageUrl, price }) {
         const sql = `
       UPDATE pizzas
       SET name = COALESCE(?, name),
@@ -46,7 +46,7 @@ class Pizzas {
           updated_at = datetime('now')
       WHERE id = ?
     `;
-        const params = [name, description, imageUrl, price, id];
+        const params = [name, ingredient, imageUrl, price, id];
 
         return new Promise((resolve, reject) => {
             db.run(sql, params, function (err) {
