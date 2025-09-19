@@ -35,7 +35,7 @@ const router = express.Router();
  *                 type: number
  *     responses:
  *       201:
- *         description: Product created
+ *         description: Pizza created
  *       400:
  *         description: Invalid input
  */
