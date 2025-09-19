@@ -42,9 +42,9 @@ const router = express.Router();
 
 /**
  * @openapi
- * /api/products/{id}:
+ * /api/pizzas/{id}:
  *   get:
- *     summary: Get a product by ID
+ *     summary: Get a pizza by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -53,11 +53,11 @@ const router = express.Router();
  *           type: integer
  *     responses:
  *       200:
- *         description: A single product
+ *         description: A single pizza
  *       404:
- *         description: Product not found
+ *         description: Pizza not found
  *   put:
- *     summary: Update a product by ID
+ *     summary: Update a pizza by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -73,7 +73,7 @@ const router = express.Router();
  *             properties:
  *               name:
  *                 type: string
- *               description:
+ *               ingredients:
  *                 type: string
  *               imageUrl:
  *                 type: string
@@ -81,13 +81,13 @@ const router = express.Router();
  *                 type: number
  *     responses:
  *       200:
- *         description: Product updated
+ *         description: Pizza updated
  *       400:
  *         description: Invalid input
  *       404:
- *         description: Product not found
+ *         description: Pizza not found
  *   delete:
- *     summary: Delete a product by ID
+ *     summary: Delete a pizza by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -96,9 +96,9 @@ const router = express.Router();
  *           type: integer
  *     responses:
  *       204:
- *         description: Product deleted
+ *         description: Pizza deleted
  *       404:
- *         description: Product not found
+ *         description: Pizza not found
  */
 
 /**
