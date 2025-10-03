@@ -27,9 +27,9 @@ exports.create = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
     try {
-        const ingredients = await Pizzas.findAll();
+        const pizzas = await Pizzas.findAll();
         // 200 OK
-        return res.status(200).json(ingredients);
+        return res.status(200).json(pizzas);
     } catch (err) {
         next(err);
     }
