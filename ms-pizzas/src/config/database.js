@@ -26,16 +26,6 @@ db.serialize(() => {
             updated_at TEXT DEFAULT ( datetime ( 'now' ))
             )
         `);
-
-    db.run(`
-        CREATE TABLE IF NOT EXISTS ingredients (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            price REAL NOT NULL,
-            created_at TEXT DEFAULT ( datetime ( 'now' )),
-            updated_at TEXT DEFAULT ( datetime ( 'now' ))
-            )
-        `);
 });
 
 module.exports = db;
