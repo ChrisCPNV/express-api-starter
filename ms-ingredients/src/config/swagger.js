@@ -1,6 +1,8 @@
 // config/swagger.js
 const swaggerJSDoc = require('swagger-jsdoc');
 
+const port = process.env.PORT || 3001;
+
 const options = {
     definition: {
         openapi: '3.0.0',
@@ -10,7 +12,7 @@ const options = {
             description: 'RESTful API for product management (SQLite, Express).'
         },
         servers: [
-            { url: 'http://localhost:3001', description: 'Local dev server' }
+            { url: `http://localhost:${port}`, description: 'Local dev server' }
         ]
     },
     apis: ['./src/ingredients/*Router.js', './src/ingredients/*Controller.js'] // pick up JSDoc in routes/controllers

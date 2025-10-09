@@ -1,12 +1,13 @@
 // controllers/pizzasController.js
 const { validationResult } = require('express-validator');
-const Pizzas = require('./Pizzas');
+const Pizzas = require('./pizza');
 
 /**
  * Controller functions use Express (req, res) signatures and
  * respond with status codes matching MDN/HTTP recommendations.
  */
 
+// POST /api/pizzas
 exports.create = async (req, res, next) => {
     try {
         // validation result
@@ -25,6 +26,7 @@ exports.create = async (req, res, next) => {
     }
 };
 
+// GET /api/pizzas/
 exports.findAll = async (req, res, next) => {
     try {
         const pizzas = await Pizzas.findAll();
@@ -35,6 +37,7 @@ exports.findAll = async (req, res, next) => {
     }
 };
 
+// GET /api/pizzas/:id
 exports.findOne = async (req, res, next) => {
     try {
         const id = Number(req.params.id);
@@ -49,6 +52,7 @@ exports.findOne = async (req, res, next) => {
     }
 };
 
+// PUT /api/pizzas/:id
 exports.update = async (req, res, next) => {
     try {
         // validation result
@@ -70,6 +74,7 @@ exports.update = async (req, res, next) => {
     }
 };
 
+// DELETE /api/pizzas/:id
 exports.delete = async (req, res, next) => {
     try {
         const id = Number(req.params.id);
@@ -80,6 +85,52 @@ exports.delete = async (req, res, next) => {
 
         // 204 No Content on successful delete
         return res.status(204).send();
+    } catch (err) {
+        next(err);
+    }
+};
+
+// GET /api/pizzas/:id/full
+exports.getPizzaWithIngredients = async (req, res, next) => {
+    try {
+        const id = Number(req.params.id);
+        const pizza = await Pizzas.getPizzaWithIngredients(id);
+        res.json(pizza);
+    } catch (err) {
+        next(err);
+    }
+};
+
+// POST /api/pizzas/:id/compositions
+exports.addComposition = async (req, res, next) => {
+    try {
+        const id = Number(req.params.id);
+        const { ingredient_id, quantity, unit } = req.body;
+        const composition = await Pizzas.addComposition(id, { ingredient_id, quantity, unit });
+        res.status(201).json(composition);
+    } catch (err) {
+        next(err);
+    }
+};
+
+// GET /api/pizzas/:id/compositions
+exports.getCompositions = async (req, res, next) => {
+    try {
+        const id = Number(req.params.id);
+        const compositions = await Pizzas.getCompositions(id);
+        res.json(compositions);
+    } catch (err) {
+        next(err);
+    }
+};
+
+// DELETE /api/pizzas/:id/compositions
+exports.deleteCompositions = async (req, res, next) => {
+    try {
+        const id = Number(req.params.id);
+        const deleted = await Pizzas.deleteCompositions(id);
+        if (!deleted) return res.status(404).json({ error: 'Pizza or compositions not found' });
+        res.status(204).send();
     } catch (err) {
         next(err);
     }

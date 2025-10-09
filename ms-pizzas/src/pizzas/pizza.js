@@ -66,6 +66,37 @@ class Pizzas {
             });
         });
     }
-}
 
+    static findCompositions(pizzaId) {
+        const sql = `SELECT * FROM pizzaIngredients WHERE pizza_id = ?`;
+        return new Promise((resolve, reject) => {
+            db.all(sql, [pizzaId], (err, rows) => {
+                if (err) return reject(err);
+                resolve(rows);
+            });
+        });
+    }
+
+    static insertComposition(pizzaId, ingredientId) {
+        const sql = `INSERT INTO pizzaIngredients (pizza_id, ingredient_id, created_at, updated_at)
+                     VALUES (?, ?, datetime('now'), datetime('now'))`;
+        const params = [pizzaId, ingredientId];
+        return new Promise((resolve, reject) => {
+            db.run(sql, params, function (err) {
+                if (err) return reject(err);
+                resolve({ id: this.lastID, pizzaId, ingredientId });
+            });
+        });
+    }
+
+    static deleteCompositions(id) {
+        const sql = `DELETE FROM pizzaIngredients WHERE pizza_id = ?`;
+        return new Promise((resolve, reject) => {
+            db.run(sql, [id], function (err) {
+                if (err) return reject(err);
+                resolve(this.changes); // number of rows deleted
+            });
+        });
+    }
+}
 module.exports = Pizzas;

@@ -18,7 +18,6 @@ A simple RESTful API to manage products (CRUD) built with **Express**, **SQLite3
 ```bash
 │   .env
 │   .gitignore
-│   dev.sqlite
 │   package-lock.json
 │   package.json
 │   README.md
