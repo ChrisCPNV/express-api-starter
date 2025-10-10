@@ -20,8 +20,8 @@ db.serialize(() => {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL, 
             imageUrl TEXT,
-            ingredients TEXT,
             price REAL NOT NULL,
+            ingredients TEXT,
             created_at TEXT DEFAULT ( datetime ( 'now' )),
             updated_at TEXT DEFAULT ( datetime ( 'now' ))
             )
